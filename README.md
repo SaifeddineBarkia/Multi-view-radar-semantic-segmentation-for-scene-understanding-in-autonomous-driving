@@ -1,3 +1,33 @@
+# Multi-View Radar Semantic Segmentation — Improved Losses for TMVA-Net
+
+> Télécom Paris · IMA206 research project (2020–2021)
+> **Team:** Eya Ghamgui, Siwar Mhadhbi, **Saifeddine Barkia**, Taher Romdhane
+
+Semantic segmentation of automotive radar data (Range-Angle and Range-Doppler views) on the **CARRADA** dataset, building on **TMVA-Net** ([Ouaknine et al., 2021](https://arxiv.org/abs/2103.16214)).
+Radar keeps working in rain, fog and darkness, which makes it a key sensor for driving-assistance systems, but its signals are much harder to interpret than camera images.
+
+## Our contribution
+
+We studied TMVA-Net's multi-view training objective and proposed two changes to the loss:
+
+1. **Weighted global loss:** reweight the Range-Doppler and Range-Angle views so training favours the more informative view.
+2. **Modified coherence loss:** change the term that enforces consistency between views, optionally using the ground truth.
+
+We trained and compared 4 models: the original TMVA-Net, the weighted global loss, weights plus a ground-truth coherence loss, and the modified coherence loss alone.
+
+| View | Best variant | mIoU | Dice |
+|---|---|---|---|
+| Range-Doppler | Modified coherence loss | **59.6%** | **71.8%** |
+| Range-Angle | Weighted global loss | **40.9%** | **50.6%** (baseline 49.4%) |
+
+Both loss changes improved on the original model. The full analysis, including qualitative results, is in the [project report](./IMA206-Projet-6.pdf).
+
+**Stack:** PyTorch · Docker · TensorBoard
+
+---
+
+*The original README from the TMVA-Net authors follows. The base code is theirs; the loss changes above are ours.*
+
 # Multi-View Radar Semantic Segmentation
 
 ## Paper
